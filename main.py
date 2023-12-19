@@ -11,7 +11,7 @@ model = genai.GenerativeModel("gemini-pro")
 app = Flask(__name__)
 
 # Define a route for the translation function
-@app.route("/translate", methods=["POST"])
+@app.route("/", methods=["POST"])
 def translate():
     # Get the input parameters from the post request
     text_list = request.json["text_list"]
