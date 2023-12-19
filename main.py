@@ -1,8 +1,10 @@
 # Import the necessary packages
 import google.generativeai as genai
 from flask import Flask, request, jsonify
+import os
 
-genai.configure(api_key="YOUR_API_KEY")
+
+genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
 model = genai.GenerativeModel("gemini-pro")
 
 # Create a Flask object for the REST API
