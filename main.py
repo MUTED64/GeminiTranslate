@@ -81,4 +81,4 @@ def get_gemini_translation(text, source_lang, target_lang):
 
 # Run the app on the local server
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000)
+    app.run(host="0.0.0.0", port=8640)
