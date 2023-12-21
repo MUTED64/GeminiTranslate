@@ -2,8 +2,11 @@
 import google.generativeai as genai
 from flask import Flask, request, jsonify
 import os
+import time
+import requests
+import threading
 
-
+url = os.getenv('API_URL')
 genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
 model = genai.GenerativeModel("gemini-pro")
 
@@ -87,7 +90,15 @@ def get_gemini_translation(text_list, source_lang, target_lang):
     # Return the output as a JSON response
     return jsonify(output)
 
+def request_thread(url, interval):
+    while True:
+        requests.get(url)
+        time.sleep(interval)
+
 
 # Run the app on the local server
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80)
+    interval = 600
+    request_thread = threading.Thread(target=request_thread, args=(url, interval))
+    request_thread.start()
